@@ -15,5 +15,4 @@ const noteLogger = () =>{
         ]
       });
 }
-
 module.exports = noteLogger;

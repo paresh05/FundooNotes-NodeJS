@@ -1,54 +1,42 @@
-const Note = require("../models/note.model.js");
-const logger = require('../logger');
-// Create and Save a new Note
-exports.create = (req, res) => {
-  // Validate request
-  if (!req.body.content) {
-    logger.error('Note content can not be empty');
-    return res.status(400).send({
-      message: "Note content can not be empty",
-    });
-  }
+const {
+  createNewNote,
+  findAllNotes,
+  findNoteById,
+  update,
+  deleteById,
+} = require("../service/note.service.js");
+const logger = require("../logger");
 
-  // Create a Note
-  const note = new Note({
-    title: req.body.title || "Untitled Note",
-    content: req.body.content,
-  });
-
-  // Save Note in the database
-  note
-    .save()
+exports.create = (req, res) => {  
+  createNewNote(req.body.title || "Untitled Note", req.body.content)
     .then((data) => {
       res.send(data);
-      logger.info('Successfully created the note');
+      logger.info("Successfully created the note");
     })
     .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred while creating the Note.",
       });
-      logger.error('Some error occurred while creating the Note.');
+      logger.error("Some error occurred while creating the Note.");
     });
 };
 
-// Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {
-  Note.find()
+  findAllNotes()
     .then((notes) => {
       res.send(notes);
-      logger.info('Successfully returned all the notes. ');
+      logger.info("Successfully returned all the notes. ");
     })
     .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving notes.",
       });
-      logger.error("Some error occurred while retrieving notes.")
+      logger.error("Some error occurred while retrieving notes.");
     });
 };
 
-// Find a single note with a noteId
 exports.findOne = (req, res) => {
-  Note.findById(req.params.noteId)
+  findNoteById(req.params.noteId)
     .then((note) => {
       if (!note) {
         logger.error("Note not found");
@@ -57,7 +45,7 @@ exports.findOne = (req, res) => {
         });
       }
       res.send(note);
-      logger.info('Successfully found the note ');
+      logger.info("Successfully found the note ");
     })
     .catch((err) => {
       if (err.kind === "ObjectId") {
@@ -73,18 +61,14 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a note identified by the noteId in the request
 exports.update = (req, res) => {
-  // Validate Request
   if (!req.body.content) {
     logger.error("Note content can not be empty");
     return res.status(400).send({
       message: "Note content can not be empty",
     });
   }
-
-  // Find note and update it with the request body
-  Note.findByIdAndUpdate(
+  update(
     req.params.noteId,
     {
       title: req.body.title || "Untitled Note",
@@ -116,9 +100,8 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a note with the specified noteId in the request
 exports.delete = (req, res) => {
-  Note.findByIdAndRemove(req.params.noteId)
+  deleteById(req.params.noteId)
     .then((note) => {
       if (!note) {
         logger.error("Note not found");
