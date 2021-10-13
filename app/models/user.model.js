@@ -35,10 +35,22 @@ const findUsersId = (findUserId, callback) => {
   });
 };
 
-const findSingleUserAndUpdate = (findUserId,firstName, lastName,email, mobileNumber, callback) => {
+const findSingleUserAndUpdate = (
+  findUserId,
+  firstName,
+  lastName,
+  email,
+  mobileNumber,
+  callback
+) => {
   return User.findByIdAndUpdate(
     findUserId,
-    { firstName: firstName, lastName: lastName,email:email, mobileNumber:mobileNumber},
+    {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      mobileNumber: mobileNumber,
+    },
     { new: true },
     (err, data) => {
       return err ? callback(err, null) : callback(null, data);
@@ -50,4 +62,10 @@ const deleteUser = (findUserId, callback) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
-module.exports = { createUser, findUser, findUsersId, findSingleUserAndUpdate, deleteUser };
+module.exports = {
+  createUser,
+  findUser,
+  findUsersId,
+  findSingleUserAndUpdate,
+  deleteUser,
+};

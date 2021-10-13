@@ -30,10 +30,24 @@ const findUserById = (findUserId, callback) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
-const updateUser = (findUserId,firstName, lastName,email, mobileNumber, callback) => {
-  findSingleUserAndUpdate(findUserId,firstName, lastName,email, mobileNumber, (err, data) => {
-    return err ? callback(err, null) : callback(null, data);
-  });
+const updateUser = (
+  findUserId,
+  firstName,
+  lastName,
+  email,
+  mobileNumber,
+  callback
+) => {
+  findSingleUserAndUpdate(
+    findUserId,
+    firstName,
+    lastName,
+    email,
+    mobileNumber,
+    (err, data) => {
+      return err ? callback(err, null) : callback(null, data);
+    }
+  );
 };
 
 const deleteUserById = (findUserId, callback) => {

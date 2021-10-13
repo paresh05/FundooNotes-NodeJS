@@ -60,32 +60,32 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
   let id = req.params.userId;
-  let firstName = req.body.firstName
-  let lastName = req.body.lastName
-  let email = req.body.email
-  let mobileNumber = req.body.mobileNumber
-  updateUser(id,firstName,lastName,email,mobileNumber,(err, user) => {
-      if (err) {
-        if (err.kind === "ObjectId") {
-          logger.error("User not found ");
-          return res.status(404).send({
-            message: "User not found with id " + req.params.userId,
-          });
-        }
-        logger.error("Error retrieving user");
-        return res.status(500).send({
-          message: "Error updating user with id " + req.params.userId,
-        });
-      }
-      if (!user) {
-        logger.error("user not found");
+  let firstName = req.body.firstName;
+  let lastName = req.body.lastName;
+  let email = req.body.email;
+  let mobileNumber = req.body.mobileNumber;
+  updateUser(id, firstName, lastName, email, mobileNumber, (err, user) => {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        logger.error("User not found ");
         return res.status(404).send({
-          message: "user not found with id " + req.params.userId,
+          message: "User not found with id " + req.params.userId,
         });
       }
-      res.send(user);
-      logger.info("Successfully updated the user");
-    })
+      logger.error("Error retrieving user");
+      return res.status(500).send({
+        message: "Error updating user with id " + req.params.userId,
+      });
+    }
+    if (!user) {
+      logger.error("user not found");
+      return res.status(404).send({
+        message: "user not found with id " + req.params.userId,
+      });
+    }
+    res.send(user);
+    logger.info("Successfully updated the user");
+  });
 };
 
 exports.delete = (req, res) => {
