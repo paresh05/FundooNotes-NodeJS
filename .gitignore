@@ -1,4 +1,5 @@
 node_modules/
+/package-lock.json
 /logger/server.log
 /logger/server-2021-10-12.log
 /logger/server-2021-10-13.log
