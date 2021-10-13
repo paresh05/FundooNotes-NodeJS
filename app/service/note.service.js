@@ -8,10 +8,6 @@ const {
 
 const createNewNote = (title, content) => {
   let note = createNote(title, content)
-    .then((result) => {
-      return result;
-    })
-    .catch();
   return note;
 };
 
@@ -21,7 +17,7 @@ const findAllNotes = () => {
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 
 //query to find a single note
@@ -30,7 +26,8 @@ const findNoteById = (findId) => {
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{ 
+    return err});
 };
 
 // Find note and update it with the request body
@@ -39,7 +36,7 @@ const update = (findId, { title: title, content: content }) => {
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 
 //query to delete a note
@@ -48,7 +45,7 @@ const deleteById = (findId) => {
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 
 module.exports = {

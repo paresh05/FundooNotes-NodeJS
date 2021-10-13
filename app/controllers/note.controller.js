@@ -5,7 +5,7 @@ const {
   update,
   deleteById,
 } = require("../service/note.service.js");
-const logger = require("../logger");
+const logger = require("../../logger");
 
 exports.create = (req, res) => {  
   createNewNote(req.body.title || "Untitled Note", req.body.content)

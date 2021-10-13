@@ -1,4 +1,4 @@
-const logger = require("../logger");
+const logger = require("../../logger");
 module.exports = (req, res, next) => {
   if (!req.body.content) {
     logger.error("Note content can not be empty (handled by middleware)");

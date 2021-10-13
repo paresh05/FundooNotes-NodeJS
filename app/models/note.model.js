@@ -20,21 +20,21 @@ const createNote = (title, content) => {
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 const findNote = () => {
   return Note.find()
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 const findNoteId = (findId) => {
   return Note.findById(findId)
     .then((result) => {
       return result;
-    })
-    .catch();
+    }).catch ( err =>{
+    return err});
 };
 const updateNote = (findId, { title: title, content: content }) => {
   return Note.findByIdAndUpdate(
@@ -45,13 +45,13 @@ const updateNote = (findId, { title: title, content: content }) => {
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 const deleteNote = (findId) => {
   return Note.findByIdAndRemove(findId)
     .then((result) => {
       return result;
     })
-    .catch();
+    .catch(err =>{return err});
 };
 module.exports = { createNote, findNote, findNoteId, updateNote, deleteNote };

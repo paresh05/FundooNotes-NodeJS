@@ -1,6 +1,4 @@
 module.exports = (app) => {
-  const express = require("express");
-  const router = express.Router();
   const notes = require("../controllers/note.controller.js");
   const validate = require("../middleware/note.middleware");
   // Create a new Note
