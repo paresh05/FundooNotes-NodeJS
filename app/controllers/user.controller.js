@@ -1,4 +1,5 @@
 const {
+  registerUser,
   createNewUser,
   findAllUsers,
   findUserById,
@@ -6,6 +7,31 @@ const {
   deleteUserById,
 } = require("../service/user.service.js");
 const logger = require("../../logger");
+
+exports.loginUser = (req, res) => {
+  registerUser(req.body.email, req.body.password, (err, user) => {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        logger.error("User not found");
+        return res.status(404).send({
+          message: "Invalid User Credentials ",
+        });
+      }
+      logger.error("Error retrieving user");
+      return res.status(500).send({
+        message: "Error retrieving user with email " + req.body.email,
+      });
+    }
+    if (!user) {
+      logger.error("User not found");
+      return res.status(404).send({
+        message: "Invalid User Credentials",
+      });
+    }
+    res.send(user);
+    logger.info("Successfully found the user ");
+  });
+};
 
 exports.create = (req, res) => {
   createNewUser(req.body, (err, dataUser) => {
@@ -64,28 +90,37 @@ exports.update = (req, res) => {
   let lastName = req.body.lastName;
   let email = req.body.email;
   let mobileNumber = req.body.mobileNumber;
-  updateUser(id, firstName, lastName, email, mobileNumber, (err, user) => {
-    if (err) {
-      if (err.kind === "ObjectId") {
-        logger.error("User not found ");
-        return res.status(404).send({
-          message: "User not found with id " + req.params.userId,
+  let password = req.body.password;
+  updateUser(
+    id,
+    firstName,
+    lastName,
+    email,
+    mobileNumber,
+    password,
+    (err, user) => {
+      if (err) {
+        if (err.kind === "ObjectId") {
+          logger.error("User not found ");
+          return res.status(404).send({
+            message: "User not found with id " + req.params.userId,
+          });
+        }
+        logger.error("Error retrieving user");
+        return res.status(500).send({
+          message: "Error updating user with id " + req.params.userId,
         });
       }
-      logger.error("Error retrieving user");
-      return res.status(500).send({
-        message: "Error updating user with id " + req.params.userId,
-      });
+      if (!user) {
+        logger.error("user not found");
+        return res.status(404).send({
+          message: "user not found with id " + req.params.userId,
+        });
+      }
+      res.send(user);
+      logger.info("Successfully updated the user");
     }
-    if (!user) {
-      logger.error("user not found");
-      return res.status(404).send({
-        message: "user not found with id " + req.params.userId,
-      });
-    }
-    res.send(user);
-    logger.info("Successfully updated the user");
-  });
+  );
 };
 
 exports.delete = (req, res) => {

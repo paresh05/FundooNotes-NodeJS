@@ -1,5 +1,33 @@
 const logger = require("../../logger");
-module.exports = (req, res, next) => {
+const validateWithJoi = (req, res, next) => {
+  user = req.body;
+  const joi = require("joi");
+  const data = req.body;
+  const schema = joi.object().keys({
+    firstName: joi
+      .string()
+      .regex(/^[A-Z]{1}[a-z]{2,}$/)
+      .required(),
+    lastName: joi
+      .string()
+      .regex(/^[A-Z]{1}[a-z]{2,}$/)
+      .required(),
+    email: joi.string().email().required(),
+    mobileNumber: joi
+      .string()
+      .regex(/^[0-9]{2} [0-9]{10}$/)
+      .required(),
+    password: joi.string().regex(/.{8,}/).required(),
+  });
+  const { error } = schema.validate(data);
+  if (error) {
+    logger.error(error.details[0].message);
+    return res.status(400).send(error.details[0].message);
+  } else {
+    next();
+  }
+};
+const validate = (req, res, next) => {
   if (!req.body.firstName) {
     logger.error("First Name can not be empty (handled by middleware)");
     return res.status(400).send({
@@ -50,4 +78,8 @@ module.exports = (req, res, next) => {
   } else {
     next();
   }
+};
+module.exports = {
+  validateWithJoi,
+  validate,
 };

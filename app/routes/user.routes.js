@@ -1,8 +1,11 @@
 module.exports = (app) => {
   const users = require("../controllers/user.controller.js");
-  const validateUser = require("../middleware/user.middleware.js");
+  const {
+    validateWithJoi,
+    validate,
+  } = require("../middleware/user.middleware.js");
   // Create a new Note
-  app.post("/users", validateUser, users.create);
+  app.post("/users", validateWithJoi, users.create);
 
   // Retrieve all Notes
   app.get("/users", users.findAll);
@@ -11,8 +14,10 @@ module.exports = (app) => {
   app.get("/users/:userId", users.findOne);
 
   // Update a Note with noteId
-  app.put("/users/:userId", validateUser, users.update);
+  app.put("/users/:userId", validateWithJoi, users.update);
 
   // Delete a Note with noteId
   app.delete("/users/:userId", users.delete);
+
+  app.post("/login", users.loginUser);
 };

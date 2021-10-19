@@ -1,5 +1,6 @@
 const logger = require("../../logger");
-module.exports = (req, res, next) => {
+const jwtUtil = require("../../utility/jwt");
+const validation = (req, res, next) => {
   if (!req.body.content) {
     logger.error("Note content can not be empty (handled by middleware)");
     return res.status(400).send({
@@ -16,4 +17,22 @@ module.exports = (req, res, next) => {
   } else {
     next();
   }
+};
+const verifyToken = (req, res, next) => {
+  const bearerHeader = req.headers["authorization"];
+  if (!bearerHeader) {
+    res.send("Token is empty");
+  }
+  const bearer = bearerHeader.split(" ");
+  const token = bearer[1];
+  jwtUtil.tokenVerification(token, (err, data) => {
+    if (err) {
+      res.send(err);
+    }
+    next();
+  });
+};
+module.exports = {
+  validation,
+  verifyToken,
 };
