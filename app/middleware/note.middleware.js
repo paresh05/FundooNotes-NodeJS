@@ -19,7 +19,7 @@ const validation = (req, res, next) => {
   }
 };
 const verifyToken = (req, res, next) => {
-  const bearerHeader = req.headers["authorization"];
+  const bearerHeader = req.headers.authorization || req.headers.access_token;
   if (!bearerHeader) {
     res.send("Token is empty");
   }

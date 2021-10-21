@@ -7,6 +7,7 @@ const {
   deleteUserById,
 } = require("../service/user.service.js");
 const logger = require("../../logger");
+const { createEmail}= require("../../utility/nodemailer");
 
 exports.loginUser = (req, res) => {
   registerUser(req.body.email, req.body.password, (err, user) => {
@@ -28,8 +29,9 @@ exports.loginUser = (req, res) => {
         message: "Invalid User Credentials",
       });
     }
-    res.send(user);
     logger.info("Successfully found the user ");
+    res.send(user);
+    createEmail();
   });
 };
 

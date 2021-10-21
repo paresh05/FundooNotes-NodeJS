@@ -1,4 +1,5 @@
 const jwtUtil = require("../../utility/jwt");
+const bcrypt = require("bcrypt");
 const {
   createUser,
   findUser,
@@ -13,12 +14,12 @@ const registerUser = (email, password, callback) => {
     if (err) {
       return callback(err, null);
     } else {
-      if (data != null && (password==data.password)) {
+      if (data != null && bcrypt.compareSync(password, data.password)) {
         var token = jwtUtil.tokenGeneration(email);
         var result = data + "Token:" + token;
         return callback(null, result);
       } else {
-        return callback(err,null);
+        return callback(err, null);
       }
     }
   });
