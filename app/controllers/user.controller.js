@@ -3,11 +3,16 @@ const {
   createNewUser,
   findAllUsers,
   findUserById,
+  checkEmail,
   updateUser,
   deleteUserById,
+  createNewPassword,
 } = require("../service/user.service.js");
 const logger = require("../../logger");
-const { createEmail}= require("../../utility/nodemailer");
+const {
+  createEmail,
+  forgotPasswordEmail,
+} = require("../../utility/nodemailer");
 
 exports.loginUser = (req, res) => {
   registerUser(req.body.email, req.body.password, (err, user) => {
@@ -32,6 +37,59 @@ exports.loginUser = (req, res) => {
     logger.info("Successfully found the user ");
     res.send(user);
     createEmail();
+  });
+};
+
+exports.forgotPassword = (req, res) => {
+  checkEmail(req.body.email, (err, user) => {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        logger.error("User not found");
+        return res.status(404).send({
+          message: "Invalid User Credentials ",
+        });
+      }
+      logger.error("Error retrieving user");
+      return res.status(500).send({
+        message: "Error retrieving user with email " + req.body.email,
+      });
+    }
+    if (!user) {
+      logger.error("User not found");
+      return res.status(404).send({
+        message: "Invalid User Credentials",
+      });
+    }
+    logger.info("Successfully found the user ");
+    forgotPasswordEmail(req.body.email, user);
+    res.json({ mesaage: "Reset link sent to the your Email " });
+  });
+};
+
+exports.resetPassword = (req, res) => {
+  let token = req.params.token;
+  let passwordReset = req.body.password;
+  createNewPassword(token, passwordReset, (err, data) => {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        logger.error("Error while reseting the password");
+        return res.status(404).send({
+          message: "Error while reseting the password",
+        });
+      }
+      logger.error("Error while reseting the password ");
+      return res.status(500).send({
+        message: "Error while reseting the password",
+      });
+    }
+    if (!data) {
+      logger.error("Error while reseting the password");
+      return res.status(404).send({
+        message: "Error while reseting the password",
+      });
+    }
+    logger.info("Successfully reset the passeord");
+    res.json({ mesaage: "Password has been Reset Successfully!!" });
   });
 };
 
@@ -92,37 +150,28 @@ exports.update = (req, res) => {
   let lastName = req.body.lastName;
   let email = req.body.email;
   let mobileNumber = req.body.mobileNumber;
-  let password = req.body.password;
-  updateUser(
-    id,
-    firstName,
-    lastName,
-    email,
-    mobileNumber,
-    password,
-    (err, user) => {
-      if (err) {
-        if (err.kind === "ObjectId") {
-          logger.error("User not found ");
-          return res.status(404).send({
-            message: "User not found with id " + req.params.userId,
-          });
-        }
-        logger.error("Error retrieving user");
-        return res.status(500).send({
-          message: "Error updating user with id " + req.params.userId,
-        });
-      }
-      if (!user) {
-        logger.error("user not found");
+  updateUser(id, firstName, lastName, email, mobileNumber, (err, user) => {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        logger.error("User not found ");
         return res.status(404).send({
-          message: "user not found with id " + req.params.userId,
+          message: "User not found with id " + req.params.userId,
         });
       }
-      res.send(user);
-      logger.info("Successfully updated the user");
+      logger.error("Error retrieving user");
+      return res.status(500).send({
+        message: "Error updating user with id " + req.params.userId,
+      });
     }
-  );
+    if (!user) {
+      logger.error("user not found");
+      return res.status(404).send({
+        message: "user not found with id " + req.params.userId,
+      });
+    }
+    res.send(user);
+    logger.info("Successfully updated the user");
+  });
 };
 
 exports.delete = (req, res) => {

@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-
+const {User} = require("../models/user.model")
 const NoteSchema = mongoose.Schema(
   {
+    author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     title: String,
     content: String,
   },
@@ -9,7 +10,9 @@ const NoteSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
 const Note = mongoose.model("Note", NoteSchema);
+
 const createNote = (title, content) => {
   const note = new Note({
     title: title || "Untitled Note",
@@ -22,6 +25,7 @@ const createNote = (title, content) => {
     })
     .catch(err =>{return err});
 };
+
 const findNote = () => {
   return Note.find()
     .then((result) => {

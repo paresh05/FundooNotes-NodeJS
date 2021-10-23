@@ -7,6 +7,7 @@ const {
   findEmail,
   findSingleUserAndUpdate,
   deleteUser,
+  reset,
 } = require("../models/user.model.js");
 
 const registerUser = (email, password, callback) => {
@@ -21,6 +22,24 @@ const registerUser = (email, password, callback) => {
       } else {
         return callback(err, null);
       }
+    }
+  });
+};
+
+const createNewPassword = (token, password, callback) => {
+  reset(token, password, (err, data) => {
+    return err ? callback(err, null) : callback(null, data);
+  });
+};
+
+const checkEmail = (email, callback) => {
+  findEmail(email, (err, data) => {
+    if (data != null) {
+      var tokenPassword = jwtUtil.tokenGeneration(email);
+      var resultPassword = tokenPassword;
+      return callback(null, resultPassword);
+    } else {
+      return callback(err, null);
     }
   });
 };
@@ -49,13 +68,13 @@ const findUserById = (findUserId, callback) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
+
 const updateUser = (
   findUserId,
   firstName,
   lastName,
   email,
   mobileNumber,
-  password,
   callback
 ) => {
   findSingleUserAndUpdate(
@@ -64,7 +83,6 @@ const updateUser = (
     lastName,
     email,
     mobileNumber,
-    password,
     (err, data) => {
       return err ? callback(err, null) : callback(null, data);
     }
@@ -83,5 +101,7 @@ module.exports = {
   findAllUsers,
   findUserById,
   updateUser,
+  checkEmail,
+  createNewPassword,
   deleteUserById,
 };
