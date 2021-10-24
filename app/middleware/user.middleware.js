@@ -1,4 +1,13 @@
+/**
+ * @requires logger
+ */
 const logger = require("../../logger");
+/**
+ * @description validates the user data using JOI
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Object} next
+ */
 const validateWithJoi = (req, res, next) => {
   user = req.body;
   const joi = require("joi");
@@ -27,6 +36,12 @@ const validateWithJoi = (req, res, next) => {
     next();
   }
 };
+/**
+ * @description validates the user data using Regex
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Object} next
+ */
 const validate = (req, res, next) => {
   if (!req.body.firstName) {
     logger.error("First Name can not be empty (handled by middleware)");

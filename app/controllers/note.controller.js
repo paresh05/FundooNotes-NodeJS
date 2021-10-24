@@ -6,9 +6,13 @@ const {
   deleteById,
 } = require("../service/note.service.js");
 const logger = require("../../logger");
-
-exports.create = (req, res) => {  
-  createNewNote(req.body.title || "Untitled Note", req.body.content)
+/**
+ * @description Handles request and response for creating a new note
+ * @param {Object} req
+ * @param {Object} res
+ */
+exports.create = (req, res) => {
+  createNewNote(req.body.title, req.body.content, req.body.userId)
     .then((data) => {
       res.send(data);
       logger.info("Successfully created the note");
@@ -20,23 +24,31 @@ exports.create = (req, res) => {
       logger.error("Some error occurred while creating the Note.");
     });
 };
-
+/**
+ * @description Handles request and response for finding all the notes
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.findAll = (req, res) => {
-  findAllNotes()
+  findAllNotes(req.body.userId)
     .then((notes) => {
       res.send(notes);
       logger.info("Successfully returned all the notes. ");
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving notes.",
+        message: "Invalid UserId",
       });
-      logger.error("Some error occurred while retrieving notes.");
+      logger.error("Invalid UserId");
     });
 };
-
+/**
+ * @description Handles request and response for finding a note using noteId
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.findOne = (req, res) => {
-  findNoteById(req.params.noteId)
+  findNoteById(req.params.noteId, req.body.userId)
     .then((note) => {
       if (!note) {
         logger.error("Note not found");
@@ -60,7 +72,12 @@ exports.findOne = (req, res) => {
       });
     });
 };
-
+/**
+ * @description Handles request and response for updating a note
+ * @param {Object} req
+ * @param {Object} res
+ * @returns
+ */
 exports.update = (req, res) => {
   if (!req.body.content) {
     logger.error("Note content can not be empty");
@@ -73,6 +90,7 @@ exports.update = (req, res) => {
     {
       title: req.body.title || "Untitled Note",
       content: req.body.content,
+      userId: req.body.userId,
     },
     { new: true }
   )
@@ -99,9 +117,13 @@ exports.update = (req, res) => {
       });
     });
 };
-
+/**
+ * @description Handles request and response for deleting a note
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.delete = (req, res) => {
-  deleteById(req.params.noteId)
+  deleteById(req.params.noteId, req.body.userId)
     .then((note) => {
       if (!note) {
         logger.error("Note not found");

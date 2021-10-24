@@ -1,5 +1,12 @@
+/**
+ * @requires nodemailer
+ * @requires dotenv
+ */
 var nodemailer = require("nodemailer");
 require("dotenv");
+/**
+ * @description This function is used send an email when user logs in
+ */
 const createEmail = () => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
@@ -22,7 +29,12 @@ const createEmail = () => {
     }
   });
 };
-const forgotPasswordEmail = (email,token) => {
+/**
+ * @description This function sends token in email for forgot password
+ * @param {string} email
+ * @param {string} token
+ */
+const forgotPasswordEmail = (email, token) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -34,7 +46,7 @@ const forgotPasswordEmail = (email,token) => {
     from: process.env.email,
     to: email,
     subject: "Reset Password",
-    text: "Token: "+token,
+    text: "Token: " + token,
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
@@ -46,5 +58,5 @@ const forgotPasswordEmail = (email,token) => {
 };
 module.exports = {
   createEmail,
-  forgotPasswordEmail
+  forgotPasswordEmail,
 };

@@ -1,8 +1,13 @@
+/**
+ * @requires mongoose
+ */
 const mongoose = require("mongoose");
-const {User} = require("../models/user.model")
+/**
+ * @description Creates a Note collection
+ */
 const NoteSchema = mongoose.Schema(
   {
-    author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     title: String,
     content: String,
   },
@@ -10,52 +15,94 @@ const NoteSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
 const Note = mongoose.model("Note", NoteSchema);
-
-const createNote = (title, content) => {
+/**
+ * @description This function creates a new note
+ * @param {string} title
+ * @param {string} content
+ * @param {ObjectId} userId
+ * @returns result or err
+ */
+const createNote = (title, content, userId) => {
   const note = new Note({
     title: title || "Untitled Note",
     content: content,
+    userId: userId,
   });
   return note
     .save()
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-
-const findNote = () => {
-  return Note.find()
+/**
+ * @description This function is used to get all the notes
+ * @param {ObjectId} userId
+ * @returns
+ */
+const findNote = (userId) => {
+  return Note.find({ userId: userId })
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-const findNoteId = (findId) => {
+/**
+ * @description This function is used to get a note of the id passed
+ * @param {_id} findId
+ * @param {ObjectId} userId
+ * @returns
+ */
+const findNoteId = (findId, userId) => {
   return Note.findById(findId)
+    .findOne({ userId: userId })
     .then((result) => {
       return result;
-    }).catch ( err =>{
-    return err});
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
-const updateNote = (findId, { title: title, content: content }) => {
+/**
+ * @description This function is used to update a note of the id passed
+ * @param {ObjectId} findId
+ * @returns
+ */
+const updateNote = (
+  findId,
+  { title: title, content: content, userId: userId }
+) => {
   return Note.findByIdAndUpdate(
     findId,
-    { title: title, content: content },
+    { title: title, content: content, userId: userId },
     { new: true }
   )
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-const deleteNote = (findId) => {
-  return Note.findByIdAndRemove(findId)
+/**
+ * @description This function is used to delete a note of the id passed
+ * @param {ObjectId} findId
+ * @param {_id} userId
+ * @returns
+ */
+const deleteNote = (findId, userId) => {
+  return Note.findById(findId)
+    .findOneAndDelete({ userId: userId })
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
 module.exports = { createNote, findNote, findNoteId, updateNote, deleteNote };

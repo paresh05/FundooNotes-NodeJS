@@ -1,6 +1,12 @@
+/**
+ * @requires mongoose bcrypt jwt 
+ */
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwtUtil = require("../../utility/jwt");
+/**
+ * @description Creates a user collection
+ */
 const UserSchema = mongoose.Schema(
   {
     firstName: String,
@@ -13,7 +19,9 @@ const UserSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
+/**
+ * @description This function is used to hash the password before saving the user
+ */
 UserSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -26,6 +34,11 @@ UserSchema.pre("save", async function (next) {
 });
 
 const User = mongoose.model("User", UserSchema);
+/**
+ * @description This function is used to create a new User
+ * @param {callback} callback 
+ * @returns err or user
+ */
 const createUser = (
   { firstName, lastName, email, mobileNumber, password },
   callback
@@ -41,25 +54,45 @@ const createUser = (
     return err ? callback(err, null) : callback(null, user);
   });
 };
-
+/**
+ * @description This function is used to retrieve all the users
+ * @param {callback} callback 
+ */
 const findUser = (callback) => {
   User.find((err, user) => {
     return err ? callback(err, null) : callback(null, user);
   });
 };
-
+/**
+ * @description This function is used to retrieve a user by passing the id
+ * @param {_id} findUserId 
+ * @param {callback} callback 
+ */
 const findUsersId = (findUserId, callback) => {
   User.findById(findUserId, (err, user) => {
     return err ? callback(err, null) : callback(null, user);
   });
 };
-
+/**
+ * @description This function finds a user that matches the email id passed
+ * @param {string} emailId 
+ * @param {callback} callback 
+ */
 const findEmail = (emailId, callback) => {
   User.findOne({ email: emailId }, (err, user) => {
     return err ? callback(err, null) : callback(null, user);
   });
 };
-
+/**
+ * @description This function updates a user of the id passed
+ * @param {string} findUserId 
+ * @param {string} firstName 
+ * @param {string} lastName 
+ * @param {string} email 
+ * @param {string} mobileNumber 
+ * @param {string} callback 
+ * @returns err or data
+ */
 const findSingleUserAndUpdate = (
   findUserId,
   firstName,
@@ -82,13 +115,22 @@ const findSingleUserAndUpdate = (
     }
   );
 };
-
+/**
+ * @description This function is used to delete a user of the id passed
+ * @param {_id} findUserId 
+ * @param {callback} callback 
+ */
 const deleteUser = (findUserId, callback) => {
   User.findByIdAndRemove(findUserId, (err, data) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
-
+/**
+ * @description This function is used to reset the password
+ * @param {string} token 
+ * @param {string} password 
+ * @param {callback} callback 
+ */
 const reset = (token, password, callback) => {
   jwtUtil.tokenVerification(token, (err, data) => {
     email = data.email;

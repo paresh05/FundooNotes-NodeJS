@@ -9,7 +9,12 @@ const {
   deleteUser,
   reset,
 } = require("../models/user.model.js");
-
+/**
+ * @description finds a user that matches the email id using findEmail function
+ * @param {string} email
+ * @param {string} password
+ * @param {callback} callback
+ */
 const registerUser = (email, password, callback) => {
   findEmail(email, (err, data) => {
     if (err) {
@@ -25,13 +30,22 @@ const registerUser = (email, password, callback) => {
     }
   });
 };
-
+/**
+ * @description This function is used to reset the password using reset function
+ * @param {string} token
+ * @param {string} password
+ * @param {callback} callback
+ */
 const createNewPassword = (token, password, callback) => {
   reset(token, password, (err, data) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
-
+/**
+ * @description This function generates a jwt token if the user with the email passed is found
+ * @param {string} email
+ * @param {callback} callback
+ */
 const checkEmail = (email, callback) => {
   findEmail(email, (err, data) => {
     if (data != null) {
@@ -43,7 +57,11 @@ const checkEmail = (email, callback) => {
     }
   });
 };
-
+/**
+ * @description creates a new user using create user function
+ * @param {callback} callback
+ * @returns user or err
+ */
 const createNewUser = (
   { firstName, lastName, email, mobileNumber, password },
   callback
@@ -56,19 +74,34 @@ const createNewUser = (
   );
   return user;
 };
-
+/**
+ * @description finds all the users using findUser function
+ * @param {callback} callback
+ */
 const findAllUsers = (callback) => {
   findUser((err, data) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
-
+/**
+ * @description finds a user with id passed using findUsersId function
+ * @param {_id} findUserId
+ * @param {callback} callback
+ */
 const findUserById = (findUserId, callback) => {
   findUsersId(findUserId, (err, data) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
-
+/**
+ * @description updates the user of the id using updateUser function
+ * @param {_id} findUserId
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} email
+ * @param {string} mobileNumber
+ * @param {callback} callback
+ */
 const updateUser = (
   findUserId,
   firstName,
@@ -88,7 +121,11 @@ const updateUser = (
     }
   );
 };
-
+/**
+ * @description deletes the user using deleteUserById functon
+ * @param {_id} findUserId
+ * @param {callback} callback
+ */
 const deleteUserById = (findUserId, callback) => {
   deleteUser(findUserId, (err, data) => {
     return err ? callback(err, null) : callback(null, data);

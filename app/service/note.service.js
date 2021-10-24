@@ -5,49 +5,80 @@ const {
   updateNote,
   deleteNote,
 } = require("../models/note.model.js");
-
-const createNewNote = (title, content) => {
-  let note = createNote(title, content)
-  return note;
+/**
+ * @description creates a new note using the function createNote
+ * @param {string} title
+ * @param {string} content
+ * @param {ObjectId} userId
+ * @returns err or note
+ */
+const createNewNote = (title, content, userId) => {
+  return createNote(title, content, userId)
+    .then((note) => {
+      return note;
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
-
-//query to find all notes
-const findAllNotes = () => {
-  return findNote()
+/**
+ * @description retrieves all the notes using findNote function
+ * @param {ObjectId} userId
+ * @returns err or result
+ */
+const findAllNotes = (userId) => {
+  return findNote(userId)
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-
-//query to find a single note
-const findNoteById = (findId) => {
-  return findNoteId(findId)
+/**
+ * @description retrieves a note of the id passed using findNoteId function
+ * @param {_id} findId
+ * @param {ObjectId} userId
+ * @returns err or result
+ */
+const findNoteById = (findId, userId) => {
+  return findNoteId(findId, userId)
     .then((result) => {
       return result;
     })
-    .catch(err =>{ 
-    return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-
-// Find note and update it with the request body
-const update = (findId, { title: title, content: content }) => {
-  return updateNote(findId, { title: title, content: content })
+/**
+ * @description updates a note of the id passed using updateNote function
+ * @param {_id} findId
+ * @returns err or result
+ */
+const update = (findId, { title: title, content: content, userId: userId }) => {
+  return updateNote(findId, { title: title, content: content, userId: userId })
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-
-//query to delete a note
-const deleteById = (findId) => {
-  return deleteNote(findId)
+/**
+ * @description deletes a note of the id passed using deleteNote function
+ * @param {_id} findId
+ * @param {ObjectId} userId
+ * @returns err or result
+ */
+const deleteById = (findId, userId) => {
+  return deleteNote(findId, userId)
     .then((result) => {
       return result;
     })
-    .catch(err =>{return err});
+    .catch((err) => {
+      throw err;
+    });
 };
-
 module.exports = {
   createNewNote,
   findAllNotes,

@@ -13,7 +13,11 @@ const {
   createEmail,
   forgotPasswordEmail,
 } = require("../../utility/nodemailer");
-
+/**
+ * @description handles request and response for logging in a user
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.loginUser = (req, res) => {
   registerUser(req.body.email, req.body.password, (err, user) => {
     if (err) {
@@ -39,7 +43,11 @@ exports.loginUser = (req, res) => {
     createEmail();
   });
 };
-
+/**
+ * @description handles request and response for forgot password
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.forgotPassword = (req, res) => {
   checkEmail(req.body.email, (err, user) => {
     if (err) {
@@ -65,7 +73,11 @@ exports.forgotPassword = (req, res) => {
     res.json({ mesaage: "Reset link sent to the your Email " });
   });
 };
-
+/**
+ * @description handles request and response for reset password
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.resetPassword = (req, res) => {
   let token = req.params.token;
   let passwordReset = req.body.password;
@@ -92,7 +104,11 @@ exports.resetPassword = (req, res) => {
     res.json({ mesaage: "Password has been Reset Successfully!!" });
   });
 };
-
+/**
+ * @description handles request and response for creating a new user
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.create = (req, res) => {
   createNewUser(req.body, (err, dataUser) => {
     if (err) {
@@ -105,7 +121,11 @@ exports.create = (req, res) => {
     logger.info("Successfully created the user");
   });
 };
-
+/**
+ * @description handles request and response for finding all the users
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.findAll = (req, res) => {
   findAllUsers((err, user) => {
     if (err) {
@@ -118,7 +138,11 @@ exports.findAll = (req, res) => {
     logger.info("Successfully returned all the users. ");
   });
 };
-
+/**
+ * @description handles request and response for finding a user using id
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.findOne = (req, res) => {
   findUserById(req.params.userId, (err, user) => {
     if (err) {
@@ -143,7 +167,11 @@ exports.findOne = (req, res) => {
     logger.info("Successfully found the user ");
   });
 };
-
+/**
+ * @description handles request and response for updating a user
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.update = (req, res) => {
   let id = req.params.userId;
   let firstName = req.body.firstName;
@@ -173,7 +201,11 @@ exports.update = (req, res) => {
     logger.info("Successfully updated the user");
   });
 };
-
+/**
+ * @description handles request and response for deleting a user
+ * @param {Object} req
+ * @param {Object} res
+ */
 exports.delete = (req, res) => {
   deleteUserById(req.params.userId, (err, user) => {
     if (err) {
