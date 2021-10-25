@@ -2,6 +2,7 @@
  * @requires logger
  */
 const logger = require("../../logger");
+const jwtUtil = require("../../utility/jwt");
 /**
  * @description validates the user data using JOI
  * @param {Object} req
@@ -94,7 +95,24 @@ const validate = (req, res, next) => {
     next();
   }
 };
+/**
+ * @description verifies the token for reset password
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Object} next
+ */
+const verifyResetToken = (req, res, next) => {
+  token = req.params.token;
+  jwtUtil.tokenVerification(token, (err, data) => {
+    if (err) {
+      res.send(err);
+    }
+    req.body.userId = data.userId;
+    next();
+  });
+}
 module.exports = {
   validateWithJoi,
   validate,
+  verifyResetToken
 };

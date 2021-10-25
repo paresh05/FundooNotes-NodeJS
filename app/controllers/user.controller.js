@@ -49,7 +49,7 @@ exports.loginUser = (req, res) => {
  * @param {Object} res
  */
 exports.forgotPassword = (req, res) => {
-  checkEmail(req.body.email, (err, user) => {
+  checkEmail(req.body.email, (err, token) => {
     if (err) {
       if (err.kind === "ObjectId") {
         logger.error("User not found");
@@ -62,14 +62,14 @@ exports.forgotPassword = (req, res) => {
         message: "Error retrieving user with email " + req.body.email,
       });
     }
-    if (!user) {
+    if (!token) {
       logger.error("User not found");
       return res.status(404).send({
         message: "Invalid User Credentials",
       });
     }
     logger.info("Successfully found the user ");
-    forgotPasswordEmail(req.body.email, user);
+    forgotPasswordEmail(req.body.email, token);
     res.json({ mesaage: "Reset link sent to the your Email " });
   });
 };
@@ -79,9 +79,9 @@ exports.forgotPassword = (req, res) => {
  * @param {Object} res
  */
 exports.resetPassword = (req, res) => {
-  let token = req.params.token;
   let passwordReset = req.body.password;
-  createNewPassword(token, passwordReset, (err, data) => {
+  let userId = req.body.userId;
+  createNewPassword(userId , passwordReset, (err, data) => {
     if (err) {
       if (err.kind === "ObjectId") {
         logger.error("Error while reseting the password");

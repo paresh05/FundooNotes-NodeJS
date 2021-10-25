@@ -131,16 +131,13 @@ const deleteUser = (findUserId, callback) => {
  * @param {string} password 
  * @param {callback} callback 
  */
-const reset = (token, password, callback) => {
-  jwtUtil.tokenVerification(token, (err, data) => {
-    email = data.email;
-    User.findOne({ email: email }, (err, user) => {
+const reset = (userId, password, callback) => {
+    User.findOne({ _id: userId }, (err, user) => {
       user.password = password;
       user.save((err, user) => {
         return err ? callback(err, null) : callback(null, user);
       });
     });
-  });
 };
 module.exports = {
   User,

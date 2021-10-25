@@ -21,7 +21,7 @@ const registerUser = (email, password, callback) => {
       return callback(err, null);
     } else {
       if (data != null && bcrypt.compareSync(password, data.password)) {
-        var token = jwtUtil.tokenGeneration(email);
+        var token = jwtUtil.tokenGeneration(data);
         var result = data + "Token:" + token;
         return callback(null, result);
       } else {
@@ -36,8 +36,8 @@ const registerUser = (email, password, callback) => {
  * @param {string} password
  * @param {callback} callback
  */
-const createNewPassword = (token, password, callback) => {
-  reset(token, password, (err, data) => {
+const createNewPassword = (userId, password, callback) => {
+  reset(userId, password, (err, data) => {
     return err ? callback(err, null) : callback(null, data);
   });
 };
@@ -49,7 +49,7 @@ const createNewPassword = (token, password, callback) => {
 const checkEmail = (email, callback) => {
   findEmail(email, (err, data) => {
     if (data != null) {
-      var tokenPassword = jwtUtil.tokenGeneration(email);
+      var tokenPassword = jwtUtil.tokenGeneration(data);
       var resultPassword = tokenPassword;
       return callback(null, resultPassword);
     } else {

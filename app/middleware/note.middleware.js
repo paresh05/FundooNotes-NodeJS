@@ -45,6 +45,7 @@ const verifyToken = (req, res, next) => {
     if (err) {
       res.send(err);
     }
+    req.body.userId = data.userId;
     next();
   });
 };

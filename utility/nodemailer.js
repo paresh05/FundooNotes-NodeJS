@@ -46,7 +46,7 @@ const forgotPasswordEmail = (email, token) => {
     from: process.env.email,
     to: email,
     subject: "Reset Password",
-    text: "Token: " + token,
+    text: "Please click on the link to reset the password  Link: http://localhost:3000/users/login/reset/" + token,
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {

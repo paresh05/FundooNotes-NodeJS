@@ -8,8 +8,8 @@ const jwt = require("jsonwebtoken");
  * @description generates JWT token
  * @param {string} email
  */
-exports.tokenGeneration = (email) => {
-  return jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, {
+exports.tokenGeneration = (data) => {
+  return jwt.sign({email:data.email, userId: data._id}, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: "1d",
   });
 };

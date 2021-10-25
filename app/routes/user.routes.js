@@ -3,6 +3,7 @@ module.exports = (app) => {
   const {
     validateWithJoi,
     validate,
+    verifyResetToken
   } = require("../middleware/user.middleware.js");
 
   app.post("/users", validateWithJoi, users.create);
@@ -19,5 +20,5 @@ module.exports = (app) => {
 
   app.post("/users/login/forgotPassword", users.forgotPassword);
 
-  app.post("/users/login/reset/:token", users.resetPassword);
+  app.post("/users/login/reset/:token",verifyResetToken, users.resetPassword);
 };
