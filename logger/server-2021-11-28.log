@@ -1,0 +1,104 @@
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 10:32:35"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 10:41:07"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 10:41:36"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 10:54:15"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 10:55:23"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:36:45"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 11:37:08"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 11:37:20"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:39:06"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:41:04"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:42:03"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:44:46"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:48:53"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:48:56"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:49:09"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 11:49:17"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 12:00:19"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 12:01:27"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 12:02:57"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 12:16:57"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 12:17:37"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 12:17:48"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 12:18:50"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:42:18"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 14:43:06"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 14:55:48"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:56:35"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:57:35"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:57:50"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:57:56"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:58:05"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:58:10"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:58:52"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:59:11"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 14:59:49"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 15:00:01"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 15:00:29"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:15:57"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:16:15"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:16:21"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 15:17:15"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 15:17:29"}
+{"level":"info","message":"Successfully created the note","timestamp":"28-Nov-2021 15:20:26"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 15:20:31"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 15:20:33"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 15:20:43"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:20:44"}
+{"level":"info","message":"Successfully deleted the note","timestamp":"28-Nov-2021 15:20:49"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:21:39"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:25:29"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 15:25:35"}
+{"level":"info","message":"Successfully found the user ","timestamp":"28-Nov-2021 19:11:16"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 19:11:17"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 19:11:20"}
+{"level":"error","message":"Note a valid title name","timestamp":"28-Nov-2021 19:11:31"}
+{"level":"info","message":"Successfully created the note","timestamp":"28-Nov-2021 19:12:05"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 19:12:09"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 19:12:22"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 19:12:25"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 19:12:26"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 19:12:37"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:12:39"}
+{"level":"info","message":"Successfully deleted the note","timestamp":"28-Nov-2021 19:12:49"}
+{"level":"info","message":"Successfully created the note","timestamp":"28-Nov-2021 19:16:01"}
+{"level":"error","message":"Note not found ","timestamp":"28-Nov-2021 19:16:34"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 19:16:37"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:16:39"}
+{"level":"info","message":"Successfully created the note","timestamp":"28-Nov-2021 19:19:22"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 19:19:48"}
+{"level":"info","message":"Successfully created the note","timestamp":"28-Nov-2021 19:19:59"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:20:01"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:20:03"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:20:07"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:20:14"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:20:34"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 19:20:36"}
+{"level":"info","message":"Successfully deleted the note","timestamp":"28-Nov-2021 19:20:41"}
+{"level":"info","message":"Successfully deleted the note","timestamp":"28-Nov-2021 19:20:42"}
+{"level":"info","message":"Successfully deleted the note","timestamp":"28-Nov-2021 19:20:44"}
+{"level":"error","message":"User not found","timestamp":"28-Nov-2021 19:25:56"}
+{"level":"info","message":"Successfully found the user ","timestamp":"28-Nov-2021 22:49:49"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 22:49:50"}
+{"level":"info","message":"Successfully found the user ","timestamp":"28-Nov-2021 22:50:21"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 22:50:21"}
+{"level":"error","message":"\"firstName\" with value \"psaaa\" fails to match the required pattern: /^[A-Z]{1}[a-z]{2,}$/","timestamp":"28-Nov-2021 22:53:50"}
+{"level":"error","message":"\"firstName\" with value \"pareshhh\" fails to match the required pattern: /^[A-Z]{1}[a-z]{2,}$/","timestamp":"28-Nov-2021 22:54:40"}
+{"level":"error","message":"\"firstName\" with value \"pareshhh\" fails to match the required pattern: /^[A-Z]{1}[a-z]{2,}$/","timestamp":"28-Nov-2021 22:56:11"}
+{"level":"error","message":"\"firstName\" with value \"pareshhh\" fails to match the required pattern: /^[A-Z]{1}[a-z]{2,}$/","timestamp":"28-Nov-2021 22:56:39"}
+{"level":"error","message":"\"firstName\" with value \"pareshhh\" fails to match the required pattern: /^[A-Z]{1}[a-z]{2,}$/","timestamp":"28-Nov-2021 22:58:04"}
+{"level":"info","message":"Successfully created the user","timestamp":"28-Nov-2021 23:04:09"}
+{"level":"error","message":"\"firstName\" with value \"parez\" fails to match the required pattern: /^[A-Z]{1}[a-z]{2,}$/","timestamp":"28-Nov-2021 23:15:57"}
+{"level":"info","message":"Successfully created the user","timestamp":"28-Nov-2021 23:16:57"}
+{"level":"info","message":"Successfully found the user ","timestamp":"28-Nov-2021 23:18:10"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 23:18:11"}
+{"level":"error","message":"User not found","timestamp":"28-Nov-2021 23:20:02"}
+{"level":"info","message":"Successfully found the user ","timestamp":"28-Nov-2021 23:20:20"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 23:20:21"}
+{"level":"info","message":"Successfully found the user ","timestamp":"28-Nov-2021 23:23:44"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 23:23:44"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 23:23:52"}
+{"level":"info","message":"Successfully returned all the notes. ","timestamp":"28-Nov-2021 23:23:56"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 23:23:59"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 23:24:02"}
+{"level":"info","message":"Successfully updated the note","timestamp":"28-Nov-2021 23:24:03"}

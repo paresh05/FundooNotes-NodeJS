@@ -12,7 +12,6 @@ const UserSchema = mongoose.Schema(
     firstName: String,
     lastName: String,
     email: String,
-    mobileNumber: String,
     password: String,
   },
   {
@@ -40,14 +39,13 @@ const User = mongoose.model("User", UserSchema);
  * @returns err or user
  */
 const createUser = (
-  { firstName, lastName, email, mobileNumber, password },
+  { firstName, lastName, email, password },
   callback
 ) => {
   const user = new User({
     firstName: firstName,
     lastName: lastName,
     email: email,
-    mobileNumber: mobileNumber,
     password: password,
   });
   return user.save((err, user) => {
@@ -89,7 +87,6 @@ const findEmail = (emailId, callback) => {
  * @param {string} firstName 
  * @param {string} lastName 
  * @param {string} email 
- * @param {string} mobileNumber 
  * @param {string} callback 
  * @returns err or data
  */
@@ -98,7 +95,6 @@ const findSingleUserAndUpdate = (
   firstName,
   lastName,
   email,
-  mobileNumber,
   callback
 ) => {
   return User.findByIdAndUpdate(
@@ -107,7 +103,6 @@ const findSingleUserAndUpdate = (
       firstName: firstName,
       lastName: lastName,
       email: email,
-      mobileNumber: mobileNumber,
     },
     { new: true },
     (err, data) => {

@@ -91,6 +91,9 @@ exports.update = (req, res) => {
       title: req.body.title || "Untitled Note",
       content: req.body.content,
       userId: req.body.userId,
+      isTrash: req.body.isTrash,
+      color:req.body.color,
+      image:req.body.image
     },
     { new: true }
   )

@@ -55,8 +55,8 @@ const findNoteById = (findId, userId) => {
  * @param {_id} findId
  * @returns err or result
  */
-const update = (findId, { title: title, content: content, userId: userId }) => {
-  return updateNote(findId, { title: title, content: content, userId: userId })
+const update = (findId, { title: title, content: content, userId: userId , isTrash:isTrash, color:color,image:image}) => {
+  return updateNote(findId, { title: title, content: content, userId: userId, isTrash:isTrash,color:color,image:image})
     .then((result) => {
       return result;
     })

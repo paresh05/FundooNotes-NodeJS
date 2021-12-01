@@ -39,8 +39,7 @@ const verifyToken = (req, res, next) => {
   if (!bearerHeader) {
     res.send("Token is empty");
   }
-  const bearer = bearerHeader.split(" ");
-  const token = bearer[1];
+  const token = bearerHeader;
   jwtUtil.tokenVerification(token, (err, data) => {
     if (err) {
       res.send(err);

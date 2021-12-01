@@ -10,6 +10,9 @@ const NoteSchema = mongoose.Schema(
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     title: String,
     content: String,
+    isTrash:Boolean,
+    color: String,
+    image: String,
   },
   {
     timestamps: true,
@@ -28,6 +31,9 @@ const createNote = (title, content, userId) => {
     title: title || "Untitled Note",
     content: content,
     userId: userId,
+    isTrash: false,
+    color:"rgb(255, 255, 255)",
+    image:"",
   });
   return note
     .save()
@@ -75,11 +81,11 @@ const findNoteId = (findId, userId) => {
  */
 const updateNote = (
   findId,
-  { title: title, content: content, userId: userId }
+  { title: title, content: content, userId: userId ,isTrash: isTrash, color:color,image:image}
 ) => {
   return Note.findByIdAndUpdate(
     findId,
-    { title: title, content: content, userId: userId },
+    { title: title, content: content, userId: userId, isTrash: isTrash,color:color,image:image},
     { new: true }
   )
     .then((result) => {
