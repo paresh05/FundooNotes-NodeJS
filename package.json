@@ -1,7 +1,7 @@
 {
-  "name": "nodejs",
+  "name": "fundoo_notes",
   "version": "1.0.0",
-  "description": "nothing",
+  "description": "An application for taking down notes",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

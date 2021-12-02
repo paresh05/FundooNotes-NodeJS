@@ -5,24 +5,18 @@
 const logger = require("../../logger");
 const jwtUtil = require("../../utility/jwt");
 /**
- * @description validates the title of the note using regex
+ * @description validates the title of the label using regex
  * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns
  */
-const validation = (req, res, next) => {
-  if (!req.body.content) {
-    logger.error("Not content can not be empty (handled by middleware)");
-    return res.status(400).send({
-      message: "Not content can not be empty (handled by middleware)",
-    });
-  }
+const labelValidation = (req, res, next) => {
   var pattern = new RegExp("(^[a-zA-z]+([\\s][a-zA-Z]+)*$)");
-  if (!pattern.test(req.body.title)) {
-    logger.error("Not a valid title name");
+  if (!pattern.test(req.body.name)) {
+    logger.error("Not a valid name");
     return res.status(400).send({
-      message: "Not a valid title name",
+      message: "Not a valid name",
     });
   } else {
     next();
@@ -34,7 +28,7 @@ const validation = (req, res, next) => {
  * @param {Object} res
  * @param {Object} next
  */
-const verifyToken = (req, res, next) => {
+const verifyLabelToken = (req, res, next) => {
   const bearerHeader = req.headers.authorization || req.headers.access_token;
   if (!bearerHeader) {
     res.send("Token is empty");
@@ -49,6 +43,6 @@ const verifyToken = (req, res, next) => {
   });
 };
 module.exports = {
-  validation,
-  verifyToken,
+  labelValidation,
+  verifyLabelToken,
 };

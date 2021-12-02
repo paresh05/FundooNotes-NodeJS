@@ -15,4 +15,7 @@ module.exports = (app) => {
 
   // Delete a Note with noteId
   app.delete("/notes/:noteId", verifyToken, notes.delete);
+
+  // Upload a Image
+  app.post("/upload-image",verifyToken, notes.image);
 };

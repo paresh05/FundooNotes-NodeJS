@@ -6,6 +6,7 @@ const {
   deleteById,
 } = require("../service/note.service.js");
 const logger = require("../../logger");
+const multer = require("../../utility/multer");
 /**
  * @description Handles request and response for creating a new note
  * @param {Object} req
@@ -92,8 +93,8 @@ exports.update = (req, res) => {
       content: req.body.content,
       userId: req.body.userId,
       isTrash: req.body.isTrash,
-      color:req.body.color,
-      image:req.body.image
+      color: req.body.color,
+      image: req.body.image,
     },
     { new: true }
   )
@@ -149,4 +150,17 @@ exports.delete = (req, res) => {
         message: "Could not delete note with id " + req.params.noteId,
       });
     });
+};
+
+exports.image = (req, res) => {
+  const upload = multer();
+  upload(req, res, (err) => {
+    if (err) {
+      logger.error("Error in uploading the image");
+      res.status(400).send(err);
+    } else {
+      logger.info("Successfully uploaded the image");
+      res.status(200).send(req.file);
+    }
+  });
 };
