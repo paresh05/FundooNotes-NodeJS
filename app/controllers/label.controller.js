@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : Handles request and response for CRUD operations of Label
+ * @file            : label.controller.js
+ * @author          : Paresh Praveen
+ * @version         : 1.0
+ * @since           : 7-Oct-2021
+ *
+ **************************************************************************/
 const {
   createNewLabel,
   findAllLabel,

@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : get the values from the controller and sends it to model and vice versa 
+ * @file            : label.service.js
+ * @author          : Paresh Praveen
+ * @version         : 1.0
+ * @since           : 7-Oct-2021
+ *
+ **************************************************************************/
+
 const {
   createLabel,
   findLabel,

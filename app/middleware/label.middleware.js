@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : Handles the validation and token verification of labels
+ * @file            : label.middleware.js
+ * @author          : Paresh Praveen
+ * @version         : 1.0
+ * @since           : 7-Oct-2021
+ *
+ **************************************************************************/
+
 /**
  * @requires logger
  * @requires jwt

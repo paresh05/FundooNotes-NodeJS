@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : label routes for label url end points
+ * @file            : label.routes.js
+ * @author          : Paresh Praveen
+ * @version         : 1.0
+ * @since           : 7-Oct-2021
+ *
+ **************************************************************************/
+
 module.exports = (app) => {
     const label = require("../controllers/label.controller.js");
     const { labelValidation, verifyLabelToken } = require("../middleware/label.middleware");

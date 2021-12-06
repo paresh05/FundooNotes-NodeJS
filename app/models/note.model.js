@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : Creation of Note collection and CRUD operations of note
+ * @file            : note.model.js
+ * @author          : Paresh Praveen
+ * @version         : 1.0
+ * @since           : 7-Oct-2021
+ *
+ **************************************************************************/
+
 /**
  * @requires mongoose
  */

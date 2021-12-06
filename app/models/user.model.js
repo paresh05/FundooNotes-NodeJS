@@ -1,3 +1,14 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : Creation of user collection and CRUD operations of user
+ * @file            : user.model.js
+ * @author          : Paresh Praveen
+ * @version         : 1.0
+ * @since           : 7-Oct-2021
+ *
+ **************************************************************************/
+
+
 /**
  * @requires mongoose bcrypt jwt 
  */
@@ -11,7 +22,11 @@ const UserSchema = mongoose.Schema(
   {
     firstName: String,
     lastName: String,
-    email: String,
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     password: String,
   },
   {
