@@ -31,7 +31,7 @@ require("./app/routes/note.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 // listen for requests
-app.listen(process.env.PORT, () => {
+module.exports = app.listen(process.env.PORT, () => {
   console.log("Server is listening on port "+process.env.PORT);
   logger.info("Server is listening on port "+process.env.PORT)
   dbConfig();

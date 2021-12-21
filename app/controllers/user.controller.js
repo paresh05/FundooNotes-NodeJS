@@ -187,8 +187,7 @@ exports.update = (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let email = req.body.email;
-  let mobileNumber = req.body.mobileNumber;
-  updateUser(id, firstName, lastName, email, mobileNumber, (err, user) => {
+  updateUser(id, firstName, lastName, email, (err, user) => {
     if (err) {
       if (err.kind === "ObjectId") {
         logger.error("User not found ");
