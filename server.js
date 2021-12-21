@@ -34,6 +34,5 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 const PORT = process.env.PORT || process.env.portNumber
 // listen for requests
 module.exports = app.listen(PORT, () => {
-  logger.info("Server is listening on port ")
   dbConfig();
 });
