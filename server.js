@@ -11,7 +11,7 @@
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger.json");
 const dbConfig = require("./config/dbConnect.js");
-const logger = require("./logger");
+const logger = require("./logger/index");
 const cors = require("cors")
 const express = require("express");
 require("dotenv");
