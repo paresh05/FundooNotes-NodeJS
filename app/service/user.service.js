@@ -88,10 +88,10 @@ const createNewUser = ({ firstName, lastName, email, password }, callback) => {
  */
 const findAllUsers = async () => {
   try {
-    let data = await redis.getUser("user");
+    let data = await redis.getUser("users");
     if (data === null) {
       data = await findUser();
-      await redis.setUser("user", JSON.stringify(data));
+      await redis.setUser("users", JSON.stringify(data));
     }
     await redis.closeConnection();
     return JSON.parse(data);

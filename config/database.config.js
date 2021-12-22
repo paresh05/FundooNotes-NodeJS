@@ -7,7 +7,7 @@
  * @since           : 7-Oct-2021
  * 
  **************************************************************************/
-
+require("dotenv").config();
 module.exports = {
-  url: "mongodb://localhost:27017/easy-notes",
+  url: process.env.MONGO_URL
 };
