@@ -1,6 +1,6 @@
 /* ************************************************************************
  * Execution        : 1. default node  cmd> nodemon server.js
- * @descrition      : get the values from the controller and sends it to model and vice versa 
+ * @descrition      : get the values from the controller and sends it to model and vice versa
  * @file            : user.service.js
  * @author          : Paresh Praveen
  * @version         : 1.0
@@ -10,6 +10,7 @@
 
 const jwtUtil = require("../../utility/jwt");
 const bcrypt = require("bcrypt");
+const redis = require("../../utility/redis/cache");
 const {
   createUser,
   findUser,
@@ -32,7 +33,7 @@ const registerUser = (email, password, callback) => {
     } else {
       if (data != null && bcrypt.compareSync(password, data.password)) {
         var token = jwtUtil.tokenGeneration(data);
-        var result = {data: data,token:token};
+        var result = { data: data, token: token };
         return callback(null, result);
       } else {
         return callback(err, null);
@@ -72,10 +73,7 @@ const checkEmail = (email, callback) => {
  * @param {callback} callback
  * @returns user or err
  */
-const createNewUser = (
-  { firstName, lastName, email, password },
-  callback
-) => {
+const createNewUser = ({ firstName, lastName, email, password }, callback) => {
   let user = createUser(
     { firstName, lastName, email, password },
     (err, data) => {
@@ -88,10 +86,18 @@ const createNewUser = (
  * @description finds all the users using findUser function
  * @param {callback} callback
  */
-const findAllUsers = (callback) => {
-  findUser((err, data) => {
-    return err ? callback(err, null) : callback(null, data);
-  });
+const findAllUsers = async () => {
+  try {
+    let data = await redis.getUser("user");
+    if (data === null) {
+      data = await findUser();
+      await redis.setUser("user", JSON.stringify(data));
+    }
+    await redis.closeConnection();
+    return JSON.parse(data);
+  } catch (error) {
+    throw error;
+  }
 };
 /**
  * @description finds a user with id passed using findUsersId function
@@ -111,13 +117,7 @@ const findUserById = (findUserId, callback) => {
  * @param {string} email
  * @param {callback} callback
  */
-const updateUser = (
-  findUserId,
-  firstName,
-  lastName,
-  email,
-  callback
-) => {
+const updateUser = (findUserId, firstName, lastName, email, callback) => {
   findSingleUserAndUpdate(
     findUserId,
     firstName,

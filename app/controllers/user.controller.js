@@ -136,17 +136,17 @@ exports.create = (req, res) => {
  * @param {Object} req
  * @param {Object} res
  */
-exports.findAll = (req, res) => {
-  findAllUsers((err, user) => {
-    if (err) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving users.",
-      });
-      logger.error("Some error occurred while retrieving users.");
-    }
-    res.send(user);
-    logger.info("Successfully returned all the users. ");
-  });
+exports.findAll = async(req, res) => {
+  try {
+    let data = await findAllUsers();
+    logger.info("Successfully returned all the users.");
+    return res.send(data);
+  } catch (err) {
+    logger.error("Some error occurred while retrieving users.");
+    return res.status(500).send({
+      message: "Some error occurred while retrieving users.",
+    });
+  }
 };
 /**
  * @description handles request and response for finding a user using id

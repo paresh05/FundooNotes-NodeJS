@@ -8,9 +8,8 @@
  *
  **************************************************************************/
 
-
 /**
- * @requires mongoose bcrypt jwt 
+ * @requires mongoose bcrypt jwt
  */
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -50,13 +49,10 @@ UserSchema.pre("save", async function (next) {
 const User = mongoose.model("User", UserSchema);
 /**
  * @description This function is used to create a new User
- * @param {callback} callback 
+ * @param {callback} callback
  * @returns err or user
  */
-const createUser = (
-  { firstName, lastName, email, password },
-  callback
-) => {
+const createUser = ({ firstName, lastName, email, password }, callback) => {
   const user = new User({
     firstName: firstName,
     lastName: lastName,
@@ -69,17 +65,20 @@ const createUser = (
 };
 /**
  * @description This function is used to retrieve all the users
- * @param {callback} callback 
+ * @param {callback} callback
  */
-const findUser = (callback) => {
-  User.find((err, user) => {
-    return err ? callback(err, null) : callback(null, user);
-  });
+const findUser = async () => {
+  try {
+    let data = await User.find();
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 /**
  * @description This function is used to retrieve a user by passing the id
- * @param {_id} findUserId 
- * @param {callback} callback 
+ * @param {_id} findUserId
+ * @param {callback} callback
  */
 const findUsersId = (findUserId, callback) => {
   User.findById(findUserId, (err, user) => {
@@ -88,8 +87,8 @@ const findUsersId = (findUserId, callback) => {
 };
 /**
  * @description This function finds a user that matches the email id passed
- * @param {string} emailId 
- * @param {callback} callback 
+ * @param {string} emailId
+ * @param {callback} callback
  */
 const findEmail = (emailId, callback) => {
   User.findOne({ email: emailId }, (err, user) => {
@@ -98,11 +97,11 @@ const findEmail = (emailId, callback) => {
 };
 /**
  * @description This function updates a user of the id passed
- * @param {string} findUserId 
- * @param {string} firstName 
- * @param {string} lastName 
- * @param {string} email 
- * @param {string} callback 
+ * @param {string} findUserId
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} email
+ * @param {string} callback
  * @returns err or data
  */
 const findSingleUserAndUpdate = (
@@ -127,8 +126,8 @@ const findSingleUserAndUpdate = (
 };
 /**
  * @description This function is used to delete a user of the id passed
- * @param {_id} findUserId 
- * @param {callback} callback 
+ * @param {_id} findUserId
+ * @param {callback} callback
  */
 const deleteUser = (findUserId, callback) => {
   User.findByIdAndRemove(findUserId, (err, data) => {
@@ -137,17 +136,17 @@ const deleteUser = (findUserId, callback) => {
 };
 /**
  * @description This function is used to reset the password
- * @param {string} token 
- * @param {string} password 
- * @param {callback} callback 
+ * @param {string} token
+ * @param {string} password
+ * @param {callback} callback
  */
 const reset = (userId, password, callback) => {
-    User.findOne({ _id: userId }, (err, user) => {
-      user.password = password;
-      user.save((err, user) => {
-        return err ? callback(err, null) : callback(null, user);
-      });
+  User.findOne({ _id: userId }, (err, user) => {
+    user.password = password;
+    user.save((err, user) => {
+      return err ? callback(err, null) : callback(null, user);
     });
+  });
 };
 module.exports = {
   User,
